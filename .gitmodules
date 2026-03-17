@@ -1,0 +1,3 @@
+[submodule "modules/ps-module-expiry-date"]
+	path = modules/ps-module-expiry-date
+	url = git@github.com:walkidni/ps-module-expiry-date.git
