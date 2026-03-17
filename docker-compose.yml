@@ -1,0 +1,50 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: nutriweb-presta-db
+    restart: unless-stopped
+    command:
+      - --default-authentication-plugin=mysql_native_password
+      - --sql-mode=
+    environment:
+      MYSQL_DATABASE: prestashop
+      MYSQL_USER: prestashop
+      MYSQL_PASSWORD: prestashop
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uprestashop", "-pprestashop"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  prestashop:
+    image: prestashop/prestashop:8-apache
+    container_name: nutriweb-presta-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_SERVER: db
+      DB_NAME: prestashop
+      DB_USER: prestashop
+      DB_PASSWD: prestashop
+      PS_DOMAIN: localhost:8080
+      PS_HANDLE_DYNAMIC_DOMAIN: 1
+      PS_DEV_MODE: 1
+      PS_INSTALL_AUTO: 0
+      PS_ENABLE_SSL: 0
+      PS_FOLDER_ADMIN: admin-dev
+    ports:
+      - "8080:80"
+    volumes:
+      - prestashop_data:/var/www/html
+
+volumes:
+  mysql_data:
+  prestashop_data:
