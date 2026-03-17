@@ -48,6 +48,7 @@ services:
     ports:
       - "8080:80"
     volumes:
+      - ./themes/hummingbird-child:/var/www/html/themes/hummingbird-child
       - prestashop_data:/var/www/html
 
 volumes:
