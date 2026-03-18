@@ -49,6 +49,7 @@ services:
       - "8080:80"
     volumes:
       - ./scripts:/tmp/post-install-scripts
+      - ./modules/ps-module-expiry-date:/var/www/html/modules/psmoduleexpirydate
       - ./themes/hummingbird-child:/var/www/html/themes/hummingbird-child
       - prestashop_data:/var/www/html
 
