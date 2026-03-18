@@ -1,6 +1,7 @@
 # Docker
 mysql_data/
 prestashop_data/
+themes/hummingbird-child/assets/cache/
 
 # OS files
 .DS_Store

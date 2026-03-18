@@ -1,4 +1,4 @@
-# Nutriweb PrestaShop Site
+# PrestaShop Test Site
 
 This repository contains the local PrestaShop installation.
 
